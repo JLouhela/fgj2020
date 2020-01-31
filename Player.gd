@@ -1,6 +1,5 @@
 extends Area2D
 
-
 var move_start_pos = Vector2(-1, -1)
 var move_started = false
 
