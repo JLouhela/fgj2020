@@ -18,6 +18,11 @@ _global_script_class_icons={
 config/name="Fgj 2020"
 config/icon="res://icon.png"
 
+[display]
+
+window/size/width=540
+window/size/height=960
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"
