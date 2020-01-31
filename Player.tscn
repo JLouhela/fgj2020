@@ -1,0 +1,7 @@
+[gd_scene format=2]
+
+[node name="Player" type="Area2D"]
+position = Vector2( 278.567, 783.104 )
+__meta__ = {
+"_edit_group_": true
+}
