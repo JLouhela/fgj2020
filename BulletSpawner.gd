@@ -1,8 +1,5 @@
 extends Node2D
 
-var dir = Vector2()
-var target = Vector2()
-
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -16,4 +13,4 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
-#	pass
+#    pass
