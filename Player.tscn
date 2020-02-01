@@ -18,7 +18,7 @@ height = 67.005
 
 [node name="Player" type="Area2D"]
 position = Vector2( 340.867, 808.245 )
-collision_mask = 10
+collision_mask = 26
 script = ExtResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
