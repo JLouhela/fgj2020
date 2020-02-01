@@ -17,6 +17,7 @@ func _ready():
 func _input(event):
     if event is InputEventScreenDrag:
         position += event.relative
+        $BulletSpawner.initial_velocity = event.relative
 
 func _process(delta):
     if position.x - width / 2 < 0:
