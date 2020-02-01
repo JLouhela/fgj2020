@@ -5,7 +5,7 @@
 
 [node name="PartContainer" type="VBoxContainer"]
 margin_left = 10.0
-margin_top = 10.0
+margin_top = 11.0
 margin_right = 42.0
 margin_bottom = 125.0
 size_flags_horizontal = 0

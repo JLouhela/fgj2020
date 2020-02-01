@@ -1,11 +1,15 @@
 extends Area2D
 
 signal part_pickup
+signal hp_update
 
 var move_start_pos = Vector2(-1, -1)
 var move_started = false
 var width = 32
 var height = 64
+
+var hp = 10000
+export var break_level = 1
 
 var collision_type = "Player"
 var upgrade_idx = 0
@@ -18,8 +22,23 @@ func _input(event):
     if event is InputEventScreenDrag:
         position += event.relative
         $BulletSpawner.initial_velocity = event.relative
+    if event is InputEventKey and event.is_pressed():
+        if event.get_scancode() == KEY_B:
+            break_level += 1
+            print("DEBUG: break level ", break_level)
+        if event.get_scancode() == KEY_V:
+            break_level -= 1
+            print("DEBUG: break level ", break_level)
+        
+func _update_hp():
+    if break_level == 0:
+        hp += 1
+    else:
+        hp -= break_level
+    emit_signal("hp_update", hp)
 
 func _process(delta):
+    _update_hp()
     if position.x - width / 2 < 0:
         position.x = width / 2
     elif position.x + width / 2 > get_viewport_rect().size.x:
@@ -32,6 +51,8 @@ func _process(delta):
 func _on_Player_area_entered(area):
     if area.collision_type == "PartPickup":
         emit_signal("part_pickup", area.type)
+    else:
+        break_level += 1
 
 func upgrade():
     var update_speed = (upgrade_idx % 2) == 1
@@ -41,7 +62,8 @@ func upgrade():
         $BulletSpawner.bullet_count = min(15, $BulletSpawner.bullet_count + 1)
     upgrade_idx += 1
 
-
 func _on_Main_ship_upgraded():
     upgrade()
-
+    
+func _on_Main_ship_repaired():
+    break_level -= 1

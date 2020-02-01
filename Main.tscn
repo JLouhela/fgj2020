@@ -1,10 +1,21 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://RepairContainer.tscn" type="PackedScene" id=3]
 [ext_resource path="res://UpgradeContainer.tscn" type="PackedScene" id=4]
 [ext_resource path="res://EnemyPatterns.gd" type="Script" id=5]
+[ext_resource path="res://HPBar.gd" type="Script" id=6]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.705882, 0.654902, 0.654902, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.333333, 0.266667, 0.266667, 1 )
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 1 )
@@ -20,7 +31,8 @@ wait_time = 3.263
 autostart = true
 
 [node name="HUD" type="MarginContainer" parent="."]
-margin_right = 541.0
+margin_left = -0.630249
+margin_right = 540.37
 margin_bottom = 135.0
 custom_constants/margin_right = 10
 custom_constants/margin_top = 10
@@ -48,12 +60,26 @@ margin_left = 489.0
 margin_top = 0.0
 margin_right = 521.0
 margin_bottom = 115.0
+
+[node name="HPBar" type="ProgressBar" parent="HUD"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 531.0
+margin_bottom = 17.0
+rect_min_size = Vector2( 0, 7 )
+custom_styles/fg = SubResource( 1 )
+custom_styles/bg = SubResource( 2 )
+max_value = 10000.0
+percent_visible = false
+script = ExtResource( 6 )
 [connection signal="repair_parts_needed" from="." to="HUD/HBoxContainer/RepairContainer" method="_new_parts_needed"]
 [connection signal="reset_repair" from="." to="." method="randomize_repair"]
 [connection signal="reset_upgrades" from="." to="." method="randomize_upgrades"]
+[connection signal="ship_repaired" from="." to="Player" method="_on_Main_ship_repaired"]
 [connection signal="ship_repaired" from="." to="." method="randomize_repair"]
 [connection signal="ship_upgraded" from="." to="Player" method="_on_Main_ship_upgraded"]
 [connection signal="ship_upgraded" from="." to="." method="randomize_upgrades"]
 [connection signal="upgrade_parts_needed" from="." to="HUD/HBoxContainer/UpgradeContainer" method="_new_parts_needed"]
+[connection signal="hp_update" from="Player" to="HUD/HPBar" method="_on_Player_hp_update"]
 [connection signal="part_pickup" from="Player" to="." method="_on_Player_part_pickup"]
 [connection signal="timeout" from="EnemyWaveTimer" to="." method="_on_EnemyWaveTimer_timeout"]
