@@ -2,14 +2,18 @@ extends Node2D
 
 export var speed = 200
 export var alive = false
+export var part_spawn_rate = 0.1
 
 export (Curve2D) var path setget set_path
 
 onready var _path = $Path2D
 onready var _path_follow = $Path2D/PathFollow2D
 onready var timer = $SpawnTimer
- 
-var bullet = load("res://Bullet.tscn")
+
+onready var bullet = preload("res://Bullet.tscn")
+onready var part = preload("res://PartPickup.tscn")
+
+const collision_type = "Enemy"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -44,7 +48,20 @@ func spawn():
 
 
 func _on_Enemy_area_entered(area):
+    _destroy()
+    
+func _destroy():
     $CollisionShape2D.disabled = true
+    _spawn_part()
     # TODO play explosion animation
     # onAnimationFinished -> delete from scene
     queue_free()
+
+func _spawn_part():
+    var lottery = randf() # Need RandomNumberGenerator?
+    if lottery < part_spawn_rate:
+        var p = part.instance()
+        p.randomize()
+        p.position = global_position
+        p.set_as_toplevel(true)
+        get_parent().add_child(p)

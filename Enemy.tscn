@@ -27,6 +27,7 @@ position = Vector2( -35.6044, -34.3767 )
 collision_layer = 2
 collision_mask = 5
 script = ExtResource( 1 )
+part_spawn_rate = 0.2
 path = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -36,6 +37,7 @@ shape = SubResource( 1 )
 [node name="Sprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 2, 2 )
 frames = SubResource( 2 )
+frame = 1
 playing = true
 
 [node name="Path2D" type="Path2D" parent="."]

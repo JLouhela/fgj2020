@@ -14,3 +14,12 @@ func _input(event):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #    pass
+
+
+func _on_Player_area_entered(area):
+    if area.collision_type == "PartPickup":
+        _pickup_part(area)
+
+func _pickup_part(part):
+    #TBD
+    pass
