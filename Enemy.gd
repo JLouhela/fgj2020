@@ -48,7 +48,7 @@ func spawn():
 
 
 func _on_Enemy_area_entered(area):
-    _destroy()
+    call_deferred("_destroy")
     
 func _destroy():
     $CollisionShape2D.disabled = true
