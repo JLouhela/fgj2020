@@ -7,7 +7,7 @@
 margin_left = 10.0
 margin_top = 11.0
 margin_right = 42.0
-margin_bottom = 125.0
+margin_bottom = 424.0
 size_flags_horizontal = 0
 script = ExtResource( 2 )
 __meta__ = {
@@ -37,6 +37,66 @@ stretch_mode = 1
 margin_top = 72.0
 margin_right = 32.0
 margin_bottom = 104.0
+rect_min_size = Vector2( 32, 32 )
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture = ExtResource( 1 )
+stretch_mode = 1
+
+[node name="Part4" type="TextureRect" parent="."]
+margin_top = 108.0
+margin_right = 32.0
+margin_bottom = 140.0
+rect_min_size = Vector2( 32, 32 )
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture = ExtResource( 1 )
+stretch_mode = 1
+
+[node name="Part5" type="TextureRect" parent="."]
+margin_top = 144.0
+margin_right = 32.0
+margin_bottom = 176.0
+rect_min_size = Vector2( 32, 32 )
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture = ExtResource( 1 )
+stretch_mode = 1
+
+[node name="Part6" type="TextureRect" parent="."]
+margin_top = 180.0
+margin_right = 32.0
+margin_bottom = 212.0
+rect_min_size = Vector2( 32, 32 )
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture = ExtResource( 1 )
+stretch_mode = 1
+
+[node name="Part7" type="TextureRect" parent="."]
+margin_top = 216.0
+margin_right = 32.0
+margin_bottom = 248.0
+rect_min_size = Vector2( 32, 32 )
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture = ExtResource( 1 )
+stretch_mode = 1
+
+[node name="Part8" type="TextureRect" parent="."]
+margin_top = 252.0
+margin_right = 32.0
+margin_bottom = 284.0
+rect_min_size = Vector2( 32, 32 )
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture = ExtResource( 1 )
+stretch_mode = 1
+
+[node name="Part9" type="TextureRect" parent="."]
+margin_top = 288.0
+margin_right = 32.0
+margin_bottom = 320.0
 rect_min_size = Vector2( 32, 32 )
 size_flags_horizontal = 4
 size_flags_vertical = 0

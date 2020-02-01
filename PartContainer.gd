@@ -10,14 +10,26 @@ func _ready():
     self.parts = [
     $Part1,
     $Part2,
-    $Part3
+    $Part3,
+    $Part4,
+    $Part5,
+    $Part6,
+    $Part7,
+    $Part8,
+    $Part9,
     ]
     self.orig_colors = [
         $Part1.modulate,
         $Part2.modulate,
         $Part3.modulate,
+        $Part4.modulate,
+        $Part5.modulate,
+        $Part6.modulate,
+        $Part7.modulate,
+        $Part8.modulate,
+        $Part9.modulate,
     ]
-    blah(3)
+    blah(9)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -36,7 +48,7 @@ func blah(cunt):
     part.modulate = self.orig_colors[cunt - 1]
 
 func _new_parts_needed(p):
-    for i in range(0, 3):
+    for i in range(0, 9):
         if i < p.size():
             parts[i].texture = PP.texture_lookup[p[i]]
             parts[i].show()

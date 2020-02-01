@@ -9,3 +9,21 @@ expand = true
 
 [node name="Part3" parent="." index="2"]
 expand = true
+
+[node name="Part4" parent="." index="3"]
+visible = false
+
+[node name="Part5" parent="." index="4"]
+visible = false
+
+[node name="Part6" parent="." index="5"]
+visible = false
+
+[node name="Part7" parent="." index="6"]
+visible = false
+
+[node name="Part8" parent="." index="7"]
+visible = false
+
+[node name="Part9" parent="." index="8"]
+visible = false

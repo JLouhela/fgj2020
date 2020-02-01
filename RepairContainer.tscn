@@ -3,3 +3,33 @@
 [ext_resource path="res://PartContainer.tscn" type="PackedScene" id=1]
 
 [node name="RepairContainer" instance=ExtResource( 1 )]
+margin_bottom = 135.0
+
+[node name="Part1" parent="." index="0"]
+visible = false
+
+[node name="Part2" parent="." index="1"]
+visible = false
+
+[node name="Part3" parent="." index="2"]
+visible = false
+
+[node name="Part4" parent="." index="3"]
+visible = false
+
+[node name="Part5" parent="." index="4"]
+visible = false
+
+[node name="Part6" parent="." index="5"]
+visible = false
+
+[node name="Part7" parent="." index="6"]
+visible = false
+
+[node name="Part8" parent="." index="7"]
+visible = false
+
+[node name="Part9" parent="." index="8"]
+visible = false
+margin_top = 252.0
+margin_bottom = 284.0

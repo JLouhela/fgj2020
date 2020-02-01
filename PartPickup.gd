@@ -41,7 +41,11 @@ func _ready():
     noise.persistence = noise_persistence
 
 func randomize():
-    type = randi() % 6
+    var biased_type = randi() % 9
+    if biased_type < 6:
+        type = biased_type
+    else:
+        type = biased_type - 6
     if  type == Type.REPAIR_1:
         $Sprite.texture = repair1_tex
     elif  type == Type.REPAIR_2:
