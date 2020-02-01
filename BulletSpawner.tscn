@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://BulletSpawner.gd" type="Script" id=1]
+
+[node name="BulletSpawner" type="Node2D"]
+position = Vector2( 262.788, 890.147 )
+script = ExtResource( 1 )

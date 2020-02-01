@@ -16,12 +16,16 @@ _global_script_class_icons={
 [application]
 
 config/name="Fgj 2020"
+run/main_scene="res://Main.tscn"
 config/icon="res://icon.png"
 
 [display]
 
 window/size/width=540
 window/size/height=960
+window/handheld/orientation="portrait"
+window/stretch/mode="viewport"
+window/stretch/aspect="keep"
 
 [input_devices]
 
