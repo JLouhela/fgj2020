@@ -4,8 +4,8 @@
 [ext_resource path="res://Bullet.gd" type="Script" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 3.85551
-height = 4.59379
+radius = 4.72147
+height = 2.67145
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
@@ -25,9 +25,9 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2( 2, 2 )
 shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 2 )
 [connection signal="area_entered" from="." to="." method="_on_Bullet_area_entered"]
