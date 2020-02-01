@@ -11,8 +11,6 @@ signal ship_upgraded
 
 var PartPickup = preload("res://PartPickup.gd").new()
 
-const Enemy = preload("res://Enemy.tscn")
-
 onready var enemy_patterns = $EnemyPatterns
 onready var wave_timer = $EnemyWaveTimer
 
@@ -24,17 +22,20 @@ func _ready():
     randomize()
     randomize_repair()
     randomize_upgrades()
+    spawn_random_wave()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
 
 func spawn_random_wave():
-    var wave = enemy_patterns.wave
+
+    var wave = enemy_patterns.waves[randi() % enemy_patterns.waves.size()]
     for i in range(wave.count):
-        var enemy = Enemy.instance()
+        var enemy = wave.enemy.instance()
         self.add_child(enemy)
         enemy.initialize(wave, i)
+     
 
 func _on_EnemyWaveTimer_timeout():
     self.spawn_random_wave()
