@@ -22,5 +22,6 @@ func _new_parts_needed(p):
     for i in range(0, 3):
         if i < p.size():
             parts[i].texture = PP.texture_lookup[p[i]]
+            parts[i].show()
         else:
             parts[i].hide()

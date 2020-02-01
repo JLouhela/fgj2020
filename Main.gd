@@ -54,12 +54,12 @@ func randomize_upgrades():
 func _on_Player_part_pickup(type):
     var parts = self.repair_parts_needed
     var signal_name = "repair_parts_needed"
-    var rand = self.randomize_repair
     
     if type > 2:
         parts = self.upgrade_parts_needed
+        signal_name = "upgrade_parts_needed"
 
-    var needed = parts.pop_front()
+    var needed = parts.pop_back()
     if type != needed:
         if type > 2:
             randomize_upgrades()
