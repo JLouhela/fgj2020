@@ -16,7 +16,7 @@ position = Vector2( 285.129, 795.469 )
 script = ExtResource( 5 )
 
 [node name="EnemyWaveTimer" type="Timer" parent="."]
-wait_time = 3.782
+wait_time = 3.263
 autostart = true
 
 [node name="HUD" type="MarginContainer" parent="."]
@@ -49,6 +49,10 @@ margin_top = 0.0
 margin_right = 521.0
 margin_bottom = 115.0
 [connection signal="repair_parts_needed" from="." to="HUD/HBoxContainer/RepairContainer" method="_new_parts_needed"]
+[connection signal="reset_repair" from="." to="." method="randomize_repair"]
+[connection signal="reset_upgrades" from="." to="." method="randomize_upgrades"]
+[connection signal="ship_repaired" from="." to="." method="randomize_repair"]
+[connection signal="ship_upgraded" from="." to="." method="randomize_upgrades"]
 [connection signal="upgrade_parts_needed" from="." to="HUD/HBoxContainer/UpgradeContainer" method="_new_parts_needed"]
 [connection signal="part_pickup" from="Player" to="." method="_on_Player_part_pickup"]
 [connection signal="timeout" from="EnemyWaveTimer" to="." method="_on_EnemyWaveTimer_timeout"]
