@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://gfx/repair1.png" type="Texture" id=1]
+[ext_resource path="res://PartContainer.gd" type="Script" id=2]
+
+[node name="PartContainer" type="VBoxContainer"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 42.0
+margin_bottom = 125.0
+size_flags_horizontal = 0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Part1" type="TextureRect" parent="."]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture = ExtResource( 1 )
+stretch_mode = 1
+
+[node name="Part2" type="TextureRect" parent="."]
+margin_top = 36.0
+margin_right = 32.0
+margin_bottom = 68.0
+rect_min_size = Vector2( 32, 32 )
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture = ExtResource( 1 )
+stretch_mode = 1
+
+[node name="Part3" type="TextureRect" parent="."]
+margin_top = 72.0
+margin_right = 32.0
+margin_bottom = 104.0
+rect_min_size = Vector2( 32, 32 )
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture = ExtResource( 1 )
+stretch_mode = 1

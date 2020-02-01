@@ -1,6 +1,13 @@
 extends Node2D
 
 signal repair_parts_needed
+signal upgrade_parts_needed
+
+signal reset_repair
+signal reset_upgrades
+
+signal ship_repaired
+signal ship_upgraded
 
 var PartPickup = preload("res://PartPickup.gd").new()
 
@@ -16,6 +23,7 @@ var upgrade_parts_needed = []
 func _ready():
     randomize()
     randomize_repair()
+    randomize_upgrades()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -39,11 +47,36 @@ func randomize_repair():
         randi() % 3,
     ]
     emit_signal('repair_parts_needed', self.repair_parts_needed)
+    
+func randomize_upgrades():
+    self.upgrade_parts_needed = [
+        3 + randi() % 3,
+        3 + randi() % 3,
+        3 + randi() % 3,
+    ]
+    emit_signal('upgrade_parts_needed', self.upgrade_parts_needed)
 
 
 func _on_Player_part_pickup(type):
-    var needed = self.repair_parts_needed.pop_front()
+    var parts = self.repair_parts_needed
+    var signal_name = "repair_parts_needed"
+    var complete_signal = "ship_repaired"
+    var reset_signal = "reset_repair"
+
+    
+    if type > 2:
+        parts = self.upgrade_parts_needed
+        signal_name = "upgrade_parts_needed"
+        complete_signal = "ship_upgraded"
+        reset_signal = "reset_upgrades"
+
+    var needed = parts.pop_back()
     if type != needed:
-        randomize_repair()
+        emit_signal(reset_signal)
         return
-    emit_signal('repair_parts_needed', self.repair_parts_needed)
+        
+    if !parts.size():
+        emit_signal(complete_signal)
+        return
+        
+    emit_signal(signal_name, parts)
