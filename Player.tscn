@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://gfx/ship0000.png" type="Texture" id=2]
@@ -6,6 +6,14 @@
 [ext_resource path="res://gfx/ship0002.png" type="Texture" id=4]
 [ext_resource path="res://gfx/ship0001.png" type="Texture" id=5]
 [ext_resource path="res://gfx/ship0003.png" type="Texture" id=6]
+[ext_resource path="res://gfx/ship_broke_1_0001.png" type="Texture" id=7]
+[ext_resource path="res://gfx/ship_broke_1_0002.png" type="Texture" id=8]
+[ext_resource path="res://gfx/ship_broke_1_0000.png" type="Texture" id=9]
+[ext_resource path="res://gfx/ship_broke_1_0003.png" type="Texture" id=10]
+[ext_resource path="res://gfx/ship_broke_2_0001.png" type="Texture" id=11]
+[ext_resource path="res://gfx/ship_broke_2_0002.png" type="Texture" id=12]
+[ext_resource path="res://gfx/ship_broke_2_0003.png" type="Texture" id=13]
+[ext_resource path="res://gfx/ship_broke_2_0000.png" type="Texture" id=14]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -13,6 +21,16 @@ animations = [ {
 "loop": true,
 "name": "idle",
 "speed": 8.0
+}, {
+"frames": [ ExtResource( 14 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ) ],
+"loop": true,
+"name": "Broke2",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 9 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 10 ) ],
+"loop": true,
+"name": "Broke1",
+"speed": 5.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=2]
@@ -27,8 +45,7 @@ script = ExtResource( 1 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 2, 2 )
 frames = SubResource( 1 )
-animation = "idle"
-frame = 1
+animation = "Broke2"
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
