@@ -1,8 +1,8 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Enemy.gd" type="Script" id=1]
 [ext_resource path="res://gfx/enemy0001.png" type="Texture" id=2]
-[ext_resource path="res://enemy_paths/path1.tres" type="Curve2D" id=3]
+[ext_resource path="res://enemy_paths/path4.tres" type="Curve2D" id=3]
 [ext_resource path="res://gfx/enemy0000.png" type="Texture" id=4]
 
 [sub_resource type="CapsuleShape2D" id=1]
@@ -17,18 +17,12 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="Curve2D" id=3]
-_data = {
-"points": PoolVector2Array(  )
-}
-
 [node name="Enemy" type="Area2D"]
-position = Vector2( -35.6044, -34.3767 )
+position = Vector2( -61.9757, -66.0222 )
 collision_layer = 2
 collision_mask = 5
 script = ExtResource( 1 )
 part_spawn_rate = 0.5
-path = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2( 2, 2 )
@@ -37,12 +31,16 @@ shape = SubResource( 1 )
 [node name="Sprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 2, 2 )
 frames = SubResource( 2 )
+frame = 1
 playing = true
 
 [node name="Path2D" type="Path2D" parent="."]
-curve = SubResource( 3 )
+position = Vector2( -369.476, 12.3991 )
+curve = ExtResource( 3 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2( 475.462, -80.6881 )
+rotation = 2.35622
 loop = false
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
