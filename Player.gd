@@ -17,5 +17,9 @@ func _input(event):
 
 
 func _on_Player_area_entered(area):
-    if area.collisoin_type == "PartPickup":
-        print("part colliison")
+    if area.collision_type == "PartPickup":
+        _pickup_part(area)
+
+func _pickup_part(part):
+    #TBD
+    pass
