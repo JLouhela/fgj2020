@@ -1,5 +1,7 @@
 extends Area2D
 
+signal part_pickup
+
 var move_start_pos = Vector2(-1, -1)
 var move_started = false
 
@@ -18,8 +20,5 @@ func _input(event):
 
 func _on_Player_area_entered(area):
     if area.collision_type == "PartPickup":
-        _pickup_part(area)
+        emit_signal("part_pickup", area.type)
 
-func _pickup_part(part):
-    #TBD
-    pass
