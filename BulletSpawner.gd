@@ -22,7 +22,6 @@ func set_bullet_delay(d):
     $BulletTimer.wait_time = float(fire_delay_ms / 1000.0)
 
 func _get_bullet():
-    print(bullet_pool.size())
     if bullet_pool.size() > 0:
         return bullet_pool.pop_back()
     var b = bullet.instance()
