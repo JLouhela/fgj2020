@@ -29,7 +29,6 @@ func spawn_random_wave():
         self.add_child(enemy)
         enemy.initialize(wave, i)
 
-
 func _on_EnemyWaveTimer_timeout():
     self.spawn_random_wave()
 
@@ -39,4 +38,12 @@ func randomize_repair():
         randi() % 3,
         randi() % 3,
     ]
+    emit_signal('repair_parts_needed', self.repair_parts_needed)
+
+
+func _on_Player_part_pickup(type):
+    var needed = self.repair_parts_needed.pop_front()
+    if type != needed:
+        randomize_repair()
+        return
     emit_signal('repair_parts_needed', self.repair_parts_needed)
