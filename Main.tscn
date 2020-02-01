@@ -2,9 +2,9 @@
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://gfx/repair1.png" type="Texture" id=3]
+[ext_resource path="res://EnemyPatterns.gd" type="Script" id=3]
 [ext_resource path="res://RepairContainer.gd" type="Script" id=4]
-[ext_resource path="res://EnemyPatterns.gd" type="Script" id=5]
+[ext_resource path="res://gfx/repair1.png" type="Texture" id=5]
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 1 )
@@ -13,7 +13,7 @@ script = ExtResource( 1 )
 position = Vector2( 285.129, 795.469 )
 
 [node name="EnemyPatterns" type="Node" parent="."]
-script = ExtResource( 5 )
+script = ExtResource( 3 )
 
 [node name="EnemyWaveTimer" type="Timer" parent="."]
 wait_time = 3.782
@@ -42,7 +42,7 @@ script = ExtResource( 4 )
 margin_right = 32.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
-texture = ExtResource( 3 )
+texture = ExtResource( 5 )
 stretch_mode = 1
 
 [node name="Part2" type="TextureRect" parent="HUD/RepairContainer"]
@@ -50,7 +50,7 @@ margin_top = 36.0
 margin_right = 32.0
 margin_bottom = 68.0
 rect_min_size = Vector2( 32, 32 )
-texture = ExtResource( 3 )
+texture = ExtResource( 5 )
 stretch_mode = 1
 
 [node name="Part3" type="TextureRect" parent="HUD/RepairContainer"]
@@ -58,7 +58,7 @@ margin_top = 72.0
 margin_right = 32.0
 margin_bottom = 104.0
 rect_min_size = Vector2( 32, 32 )
-texture = ExtResource( 3 )
+texture = ExtResource( 5 )
 stretch_mode = 1
 [connection signal="repair_parts_needed" from="." to="HUD/RepairContainer" method="_new_repair_parts_needed"]
 [connection signal="part_pickup" from="Player" to="." method="_on_Player_part_pickup"]
