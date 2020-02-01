@@ -20,6 +20,7 @@ func _ready():
         $BulletTimer.start()
 
 func onBulletFree(b):
+    b.disable()
     bullet_pool.append(b)
     
 func _shoot():

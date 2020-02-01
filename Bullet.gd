@@ -26,6 +26,5 @@ func set_speed(s):
     bullet_speed = s
 
 func _on_Bullet_area_entered(area):
-    print("COLLISION")
     emit_signal("free_bullet", self)
 

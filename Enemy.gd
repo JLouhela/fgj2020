@@ -41,3 +41,10 @@ func _process(delta):
 
 func spawn():
     self.alive = true
+
+
+func _on_Enemy_area_entered(area):
+    $CollisionShape2D.disabled = true
+    # TODO play explosion animation
+    # onAnimationFinished -> delete from scene
+    queue_free()

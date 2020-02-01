@@ -36,7 +36,6 @@ shape = SubResource( 1 )
 [node name="Sprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 2, 2 )
 frames = SubResource( 2 )
-frame = 1
 playing = true
 
 [node name="Path2D" type="Path2D" parent="."]
@@ -49,4 +48,5 @@ loop = false
 
 [node name="SpawnTimer" type="Timer" parent="."]
 one_shot = true
+[connection signal="area_entered" from="." to="." method="_on_Enemy_area_entered"]
 [connection signal="timeout" from="SpawnTimer" to="." method="spawn" flags=6]
