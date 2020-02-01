@@ -17,6 +17,7 @@ func _ready():
 func _input(event):
     if event is InputEventScreenDrag:
         position += event.relative
+        $BulletSpawner.initial_velocity = event.relative
 
 func _process(delta):
     if position.x - width / 2 < 0:
@@ -33,10 +34,14 @@ func _on_Player_area_entered(area):
         emit_signal("part_pickup", area.type)
 
 func upgrade():
-    print("UPGRADE)")
-    var update_speed = (upgrade_idx % 2) == 0
+    var update_speed = (upgrade_idx % 2) == 1
     if update_speed:
         $BulletSpawner.set_bullet_delay(max(200, $BulletSpawner.fire_delay_ms - 50))
     else:
         $BulletSpawner.bullet_count = min(15, $BulletSpawner.bullet_count + 1)
     upgrade_idx += 1
+
+
+func _on_Main_ship_upgraded():
+    upgrade()
+

@@ -25,7 +25,6 @@ func _ready():
     randomize_repair()
     randomize_upgrades()
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
@@ -63,7 +62,6 @@ func _on_Player_part_pickup(type):
     var complete_signal = "ship_repaired"
     var reset_signal = "reset_repair"
 
-    
     if type > 2:
         parts = self.upgrade_parts_needed
         signal_name = "upgrade_parts_needed"

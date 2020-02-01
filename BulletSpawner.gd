@@ -5,6 +5,7 @@ var bullet_count = 1
 
 onready var bullet = preload("res://Bullet.tscn")
 var bullet_pool = []
+var initial_velocity = Vector2(0,0)
 
 const bullet_sep = 24
 
@@ -22,7 +23,6 @@ func set_bullet_delay(d):
     $BulletTimer.wait_time = float(fire_delay_ms / 1000.0)
 
 func _get_bullet():
-    print(bullet_pool.size())
     if bullet_pool.size() > 0:
         return bullet_pool.pop_back()
     var b = bullet.instance()
@@ -40,12 +40,11 @@ func _shoot():
 
     for i in range (0, bullet_count):
         var b = _get_bullet()
-        if (!b):
-            print("BULLET POOL TOO SMALL MAYDAY")
-            return
         var bullet_offset = bullet_sep * i
         b.position = global_position
         b.position.x += start_offset_x + bullet_offset
+        if initial_velocity.y < 0:
+            b.position.y += initial_velocity.y * 2
         b.enable()
 
 func _on_BulletTimer_timeout():
