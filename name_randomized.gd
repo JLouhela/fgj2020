@@ -4,7 +4,7 @@ extends Node
 # var a = 2
 # var b = "text"
 
-var substantives = ["wing","thruster","rotor","gyroscope","cockpit","plasma","magnetron","dark matter","DeLorean","X-ray","antimatter","coil","field","flux","device","mechanism","fuel","component","toroid","inductor","matter","rod","multiplexer""chamber","shroud","fluxer","inhibitor","accelerant","insulator","accelerant","injector","capacitor","stellarator","generator","superimposer"]
+var substantives = ["wing","thruster","rotor","gyroscope","cockpit","plasma","magnetron","dark matter","DeLorean","X-ray","antimatter","coil","field","flux","device","mechanism","fuel","component","toroid","inductor","matter","rod","multiplexer","chamber","shroud","fluxer","inhibitor","accelerant","insulator","accelerant","injector","capacitor","stellarator","generator","superimposer"]
 var adjectives = ["humongous","puny","dangerous","pulsating","beautiful","glowing","Van der Graaf's","photoinductionic","Heisenbergian","cosmotronic","space-time lost","Einsteinian","Tesla's","cosmic","cybernetic","shielding","beaming"]
 var rng = RandomNumberGenerator.new()
 var pickUpName
