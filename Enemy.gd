@@ -13,6 +13,8 @@ onready var timer = $SpawnTimer
 onready var bullet = preload("res://Bullet.tscn")
 onready var part = preload("res://PartPickup.tscn")
 
+const collision_type = "Enemy"
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
     _path.curve = path
@@ -57,9 +59,9 @@ func _destroy():
 
 func _spawn_part():
     var lottery = randf() # Need RandomNumberGenerator?
-    print(lottery)
     if lottery < part_spawn_rate:
         var p = part.instance()
+        p.randomize()
         p.position = global_position
         p.set_as_toplevel(true)
         get_parent().add_child(p)
