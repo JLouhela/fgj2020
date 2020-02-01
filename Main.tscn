@@ -50,4 +50,5 @@ margin_right = 521.0
 margin_bottom = 115.0
 [connection signal="repair_parts_needed" from="." to="HUD/HBoxContainer/RepairContainer" method="_new_parts_needed"]
 [connection signal="upgrade_parts_needed" from="." to="HUD/HBoxContainer/UpgradeContainer" method="_new_parts_needed"]
+[connection signal="part_pickup" from="Player" to="." method="_on_Player_part_pickup"]
 [connection signal="timeout" from="EnemyWaveTimer" to="." method="_on_EnemyWaveTimer_timeout"]
