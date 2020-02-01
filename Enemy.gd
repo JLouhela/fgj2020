@@ -13,6 +13,8 @@ onready var timer = $SpawnTimer
 onready var bullet = preload("res://Bullet.tscn")
 onready var part = preload("res://PartPickup.tscn")
 
+var rotate = true
+
 const collision_type = "Enemy"
 
 # Called when the node enters the scene tree for the first time.
@@ -28,20 +30,27 @@ func set_path(new_curve):
 func initialize(wave, index):
     self.path = wave.path
     self.speed = wave.speed
+    
+    self.rotate = wave.rotate
+    
+#    self._path.global_position = self.global_position
+    
     self.timer.wait_time = wave.interval * (index + 1)
     self.timer.start()
 
 func _process(delta):
-    if !self.path or !self.alive:
+    if !self.alive:
         return
-
+    
     self._path_follow.offset += self.speed * delta
 
     self.position = self._path_follow.position
-    self.rotation = self._path_follow.rotation + PI/2
+    if self.rotate:
+        self.rotation = self._path_follow.rotation + PI/2
     
     if self._path_follow.unit_offset >= 1:
         self.queue_free()
+    
 
 func spawn():
     self.alive = true
