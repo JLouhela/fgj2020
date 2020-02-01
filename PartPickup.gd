@@ -11,6 +11,15 @@ const upgrade1_tex = preload("res://gfx/upgrade1.png")
 const upgrade2_tex = preload("res://gfx/upgrade2.png")
 const upgrade3_tex = preload("res://gfx/upgrade3.png")
 
+var texture_lookup = {
+    Type.REPAIR_1: repair1_tex,
+    Type.REPAIR_2: repair2_tex,
+    Type.REPAIR_3: repair3_tex,
+    Type.UPGRADE_1: upgrade1_tex,
+    Type.UPGRADE_2: upgrade2_tex,
+    Type.UPGRADE_3: upgrade3_tex,
+}
+
 export var fall_speed = 2
 export var noise_octaves = 4
 export var noise_period = 20.0
