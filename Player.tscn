@@ -36,5 +36,4 @@ shape = SubResource( 2 )
 
 [node name="BulletSpawner" parent="." instance=ExtResource( 3 )]
 position = Vector2( -0.487671, -44.8661 )
-fire_delay_ms = 400
 [connection signal="area_entered" from="." to="." method="_on_Player_area_entered"]

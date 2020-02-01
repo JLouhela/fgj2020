@@ -1,35 +1,52 @@
 extends Node2D
 
-export var bullet_pool_size = 50
 export var fire_delay_ms = 100
+var bullet_count = 1
 
 onready var bullet = preload("res://Bullet.tscn")
 var bullet_pool = []
 
+const bullet_sep = 24
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-    for _i in range (bullet_pool_size):
-        var b = bullet.instance()
-        b.position = Vector2(-100, -100)
-        b.set_as_toplevel(true)
-        add_child(b)
-        b.disable()
-        b.connect("free_bullet", self, "onBulletFree")
-        bullet_pool.append(b)
-        $BulletTimer.wait_time = float(fire_delay_ms / 1000.0)
-        $BulletTimer.start()
+    $BulletTimer.wait_time = float(fire_delay_ms / 1000.0)
+    $BulletTimer.start()
 
 func onBulletFree(b):
     b.disable()
     bullet_pool.append(b)
     
+func set_bullet_delay(d):
+    fire_delay_ms = d
+    $BulletTimer.wait_time = float(fire_delay_ms / 1000.0)
+
+func _get_bullet():
+    print(bullet_pool.size())
+    if bullet_pool.size() > 0:
+        return bullet_pool.pop_back()
+    var b = bullet.instance()
+    b.position = Vector2(-100, -100)
+    b.set_as_toplevel(true)
+    add_child(b)
+    b.disable()
+    b.connect("free_bullet", self, "onBulletFree")
+    return b
+    
 func _shoot():
-    var b = bullet_pool.pop_back()
-    if (!b):
-        print("BULLET POOL TOO SMALL MAYDAY")
-        return
-    b.position = global_position
-    b.enable()
+    var start_offset_x = (bullet_count / 2) * -bullet_sep
+    if bullet_count % 2 == 0:
+        start_offset_x += bullet_sep / 2
+
+    for i in range (0, bullet_count):
+        var b = _get_bullet()
+        if (!b):
+            print("BULLET POOL TOO SMALL MAYDAY")
+            return
+        var bullet_offset = bullet_sep * i
+        b.position = global_position
+        b.position.x += start_offset_x + bullet_offset
+        b.enable()
 
 func _on_BulletTimer_timeout():
     _shoot()
