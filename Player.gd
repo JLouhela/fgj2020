@@ -2,6 +2,7 @@ extends Area2D
 
 signal part_pickup
 signal hp_update
+signal break_level_update
 
 var move_start_pos = Vector2(-1, -1)
 var move_started = false
@@ -27,7 +28,7 @@ func _input(event):
             break_level += 1
             print("DEBUG: break level ", break_level)
         if event.get_scancode() == KEY_V:
-            break_level -= 1
+            _break_ship()
             print("DEBUG: break level ", break_level)
         
 func _update_hp():
@@ -52,7 +53,7 @@ func _on_Player_area_entered(area):
     if area.collision_type == "PartPickup":
         emit_signal("part_pickup", area.type)
     else:
-        break_level += 1
+        _break_ship()
 
 func upgrade():
     var update_speed = (upgrade_idx % 2) == 1
@@ -62,8 +63,16 @@ func upgrade():
         $BulletSpawner.bullet_count = min(15, $BulletSpawner.bullet_count + 1)
     upgrade_idx += 1
 
+func _break_ship():
+    break_level -= 1
+    emit_signal("break_level_update", break_level)
+    
+func _repair_ship():
+    break_level += 1
+    emit_signal("break_level_update", break_level)
+
 func _on_Main_ship_upgraded():
     upgrade()
     
 func _on_Main_ship_repaired():
-    break_level -= 1
+    _repair_ship()
