@@ -29,6 +29,8 @@ export var jiggleDelay = 0.5
 var noise = OpenSimplexNoise.new()
 var jiggleCum = 0.0
 
+const collision_res_w = 5
+
 const collision_type = "PartPickup"
 
 # Called when the node enters the scene tree for the first time.
@@ -60,12 +62,19 @@ func _process(delta):
         jiggleCum -= jiggleDelay
         var change = noise.get_noise_2dv(position) * jiggleStrength
         position.x += change
+    var overlaps = get_overlapping_areas()
+    for overlap in overlaps:
+        var d_x = overlap.position.x - position.x
+        if d_x > 0:
+            position.x -= collision_res_w
+        else:
+            position.x += collision_res_w
 
 
 func _on_VisibilityNotifier2D_screen_exited():
     queue_free()
 
-
 func _on_PartPickup_area_entered(area):
-    queue_free()
-
+    if area.collision_type == "Player":
+        queue_free()
+        return
