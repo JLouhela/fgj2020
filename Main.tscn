@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://RepairContainer.tscn" type="PackedScene" id=3]
 [ext_resource path="res://UpgradeContainer.tscn" type="PackedScene" id=4]
 [ext_resource path="res://EnemyPatterns.gd" type="Script" id=5]
+[ext_resource path="res://BG.tscn" type="PackedScene" id=6]
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 1 )
@@ -48,6 +49,10 @@ margin_left = 489.0
 margin_top = 0.0
 margin_right = 521.0
 margin_bottom = 115.0
+
+[node name="BG" parent="." instance=ExtResource( 6 )]
+position = Vector2( 274.126, 2.15845 )
+z_index = -10
 [connection signal="repair_parts_needed" from="." to="HUD/HBoxContainer/RepairContainer" method="_new_parts_needed"]
 [connection signal="reset_repair" from="." to="." method="randomize_repair"]
 [connection signal="reset_upgrades" from="." to="." method="randomize_upgrades"]
