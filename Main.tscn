@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://HPBar.gd" type="Script" id=7]
 [ext_resource path="res://fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=8]
 [ext_resource path="res://ShakeCamera.gd" type="Script" id=9]
+[ext_resource path="res://Logo.tscn" type="PackedScene" id=10]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.705882, 0.654902, 0.654902, 1 )
@@ -104,17 +105,20 @@ autostart = true
 
 [node name="ShakeCamera" type="Camera2D" parent="."]
 script = ExtResource( 9 )
+
+[node name="Node2D" parent="." instance=ExtResource( 10 )]
+position = Vector2( 268.228, 361.941 )
 [connection signal="repair_parts_needed" from="." to="HUD/VBoxContainer/HBoxContainer/RepairContainer" method="_new_parts_needed"]
 [connection signal="repair_started" from="." to="Player" method="_on_Main_repair_started"]
 [connection signal="reset_upgrades" from="." to="." method="randomize_upgrades"]
 [connection signal="ship_repaired" from="." to="Player" method="_on_Main_ship_repaired"]
-[connection signal="ship_upgraded" from="." to="Player" method="_on_Main_ship_upgraded"]
 [connection signal="ship_upgraded" from="." to="." method="randomize_upgrades"]
+[connection signal="ship_upgraded" from="." to="Player" method="_on_Main_ship_upgraded"]
 [connection signal="upgrade_parts_needed" from="." to="HUD/VBoxContainer/HBoxContainer/UpgradeContainer" method="_new_parts_needed"]
-[connection signal="break_part" from="Player" to="ShakeCamera" method="_on_Player_break_part"]
 [connection signal="break_part" from="Player" to="." method="_on_Player_break_part"]
-[connection signal="hp_update" from="Player" to="Player" method="update_anim"]
+[connection signal="break_part" from="Player" to="ShakeCamera" method="_on_Player_break_part"]
 [connection signal="hp_update" from="Player" to="HUD/VBoxContainer/HPBar" method="_on_Player_hp_update"]
+[connection signal="hp_update" from="Player" to="Player" method="update_anim"]
 [connection signal="part_pickup" from="Player" to="." method="_on_Player_part_pickup"]
 [connection signal="player_dead" from="Player" to="." method="_on_Player_player_dead"]
 [connection signal="take_hit" from="Player" to="ShakeCamera" method="_on_Player_take_hit"]
