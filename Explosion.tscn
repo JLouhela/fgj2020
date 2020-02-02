@@ -10,7 +10,7 @@ animations = [ {
 "frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 1 ), ExtResource( 3 ) ],
 "loop": false,
 "name": "default",
-"speed": 7.0
+"speed": 15.0
 } ]
 
 [node name="Explosion" type="AnimatedSprite"]

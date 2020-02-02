@@ -52,9 +52,9 @@ func _input(event):
         
 func _update_hp():
     if break_level == 0 && hp < max_hp:
-        hp += 1
+        hp += 2
     else:
-        hp -= break_level
+        hp -= break_level + 1
         
     emit_signal("hp_update", hp) 
     if hp <= 0:
@@ -87,7 +87,11 @@ func _on_Player_area_entered(area):
     else:
         _break_ship()
 
+func add_hp(h):
+    hp = min(max_hp, hp + h)
+
 func upgrade():
+    add_hp(300)
     var update_speed = (upgrade_idx % 2) == 1
     if update_speed:
         $BulletSpawner.set_bullet_delay(max(200, $BulletSpawner.fire_delay_ms - 50))
@@ -103,7 +107,7 @@ func _break_ship():
     immune = true
     emit_signal("take_hit")
     if break_level == 3:
-        hp -= 50
+        hp -= 200
         return
 
     if repairing:
@@ -115,6 +119,7 @@ func _break_ship():
     
 func _repair_ship():
     repairing = false
+    add_hp(300)
     var tmp = break_level
     break_level = max(0, break_level -1)
 

@@ -39,9 +39,9 @@ func shake():
     offset.y = max_offset.y * amount * noise.get_noise_2d(noise.seed*3, noise_y)
 
 func _on_Player_break_part(break_lvl):
-    add_trauma(0.5)
+    add_trauma(0.4)
     shake()
 
 func _on_Player_take_hit():
-    add_trauma(0.5)
+    add_trauma(0.3)
     shake()
