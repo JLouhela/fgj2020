@@ -12,6 +12,7 @@ signal ship_repaired
 signal ship_upgraded
 
 var PartPickup = preload("res://PartPickup.gd").new()
+var Explosion = load("res://Explosion.tscn")
 
 onready var enemy_patterns = $EnemyPatterns
 onready var wave_timer = $EnemyWaveTimer
@@ -42,6 +43,7 @@ func spawn_random_wave():
         var enemy = wave.enemy.instance()
         self.add_child(enemy)
         enemy.initialize(wave, path, i)
+        enemy.connect("dead", self, "spawn_explosion")
      
 
 func _on_EnemyWaveTimer_timeout():
@@ -105,8 +107,21 @@ func _on_Player_break_part(break_lvl):
 
 func _on_ScoreTimer_timeout():
     score += 1
-    $ScoreText.text = ("Score: %d" % score)
+    $HUD/ScoreText.text = ("Score: %d" % score)
 
 func _on_Player_player_dead():
     # TODO
     get_tree().paused = true
+
+
+func spawn_explosion(pos):
+    var obj = Explosion.instance()
+    self.add_child(obj)
+    obj.position = pos
+    obj.play()
+
+
+
+
+func _on_LOGO_done():
+    $EnemyWaveTimer.start()

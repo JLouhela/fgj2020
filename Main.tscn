@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
@@ -11,6 +11,8 @@
 [ext_resource path="res://ShakeCamera.gd" type="Script" id=9]
 [ext_resource path="res://NotificationManager.tscn" type="PackedScene" id=10]
 [ext_resource path="res://pickUpNameRandomizer.tscn" type="PackedScene" id=11]
+[ext_resource path="res://AudioStreamPlayer.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Logo.tscn" type="PackedScene" id=13]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.705882, 0.654902, 0.654902, 1 )
@@ -28,24 +30,37 @@ font_data = ExtResource( 8 )
 [node name="Main" type="Node2D"]
 script = ExtResource( 1 )
 
+[node name="BG" parent="." instance=ExtResource( 6 )]
+position = Vector2( 274.126, 2.15845 )
+z_index = -10
+
+[node name="Music" parent="." instance=ExtResource( 12 )]
+
 [node name="pickUpNameRandomizer" parent="." instance=ExtResource( 11 )]
-
-[node name="NotificationManager" parent="." instance=ExtResource( 10 )]
-
-[node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 285.129, 795.469 )
 
 [node name="EnemyPatterns" type="Node" parent="."]
 script = ExtResource( 5 )
 
 [node name="EnemyWaveTimer" type="Timer" parent="."]
 wait_time = 2.815
+
+[node name="ScoreTimer" type="Timer" parent="."]
+wait_time = 0.1
 autostart = true
 
+[node name="ShakeCamera" type="Camera2D" parent="."]
+script = ExtResource( 9 )
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 285.129, 795.469 )
+
+[node name="NotificationManager" parent="." instance=ExtResource( 10 )]
+z_index = 100
+
 [node name="HUD" type="MarginContainer" parent="."]
-margin_left = -0.630249
-margin_right = 540.37
-margin_bottom = 135.0
+margin_left = -1.0
+margin_right = 540.0
+margin_bottom = 961.0
 custom_constants/margin_right = 10
 custom_constants/margin_top = 10
 custom_constants/margin_left = 10
@@ -58,7 +73,7 @@ __meta__ = {
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 531.0
-margin_bottom = 125.0
+margin_bottom = 951.0
 
 [node name="HPBar" type="ProgressBar" parent="HUD/VBoxContainer"]
 margin_right = 521.0
@@ -88,15 +103,13 @@ margin_top = 0.0
 margin_right = 521.0
 margin_bottom = 104.0
 
-[node name="BG" parent="." instance=ExtResource( 6 )]
-position = Vector2( 274.126, 2.15845 )
-z_index = -10
-
-[node name="ScoreText" type="Label" parent="."]
-margin_left = 414.43
-margin_top = 939.0
-margin_right = 541.43
-margin_bottom = 959.0
+[node name="ScoreText" type="Label" parent="HUD"]
+margin_left = 461.0
+margin_top = 931.0
+margin_right = 531.0
+margin_bottom = 951.0
+size_flags_horizontal = 8
+size_flags_vertical = 8
 custom_fonts/font = SubResource( 3 )
 text = "Score: 0"
 valign = 2
@@ -104,12 +117,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ScoreTimer" type="Timer" parent="."]
-wait_time = 0.1
-autostart = true
-
-[node name="ShakeCamera" type="Camera2D" parent="."]
-script = ExtResource( 9 )
+[node name="LOGO" parent="." instance=ExtResource( 13 )]
 [connection signal="repair_parts_needed" from="." to="HUD/VBoxContainer/HBoxContainer/RepairContainer" method="_new_parts_needed"]
 [connection signal="repair_started" from="." to="Player" method="_on_Main_repair_started"]
 [connection signal="reset_upgrades" from="." to="." method="randomize_upgrades"]
@@ -118,6 +126,8 @@ script = ExtResource( 9 )
 [connection signal="ship_upgraded" from="." to="Player" method="_on_Main_ship_upgraded"]
 [connection signal="ship_upgraded" from="." to="." method="randomize_upgrades"]
 [connection signal="upgrade_parts_needed" from="." to="HUD/VBoxContainer/HBoxContainer/UpgradeContainer" method="_new_parts_needed"]
+[connection signal="timeout" from="EnemyWaveTimer" to="." method="_on_EnemyWaveTimer_timeout"]
+[connection signal="timeout" from="ScoreTimer" to="." method="_on_ScoreTimer_timeout"]
 [connection signal="break_part" from="Player" to="ShakeCamera" method="_on_Player_break_part"]
 [connection signal="break_part" from="Player" to="." method="_on_Player_break_part"]
 [connection signal="hp_update" from="Player" to="Player" method="update_anim"]
@@ -125,5 +135,5 @@ script = ExtResource( 9 )
 [connection signal="part_pickup" from="Player" to="." method="_on_Player_part_pickup"]
 [connection signal="player_dead" from="Player" to="." method="_on_Player_player_dead"]
 [connection signal="take_hit" from="Player" to="ShakeCamera" method="_on_Player_take_hit"]
-[connection signal="timeout" from="EnemyWaveTimer" to="." method="_on_EnemyWaveTimer_timeout"]
-[connection signal="timeout" from="ScoreTimer" to="." method="_on_ScoreTimer_timeout"]
+[connection signal="done" from="LOGO" to="." method="_on_LOGO_done"]
+[connection signal="tree_exiting" from="LOGO" to="." method="_on_lg_tree_exiting"]

@@ -28,7 +28,9 @@ func _ready():
     "speed": 400,
     "rotate": true,
     "shoots": false,
+    "shoot_at_player": true,
     "interval": 0.5,
+    "bullet_speed": 500,
 },
 {
     "enemy": enemy1,
@@ -37,6 +39,7 @@ func _ready():
     "rotate": true,
     "shoots": false,
     "interval": 0.6,
+    "bullet_speed": 500,
 },
 {
     "enemy": enemy2,
@@ -48,7 +51,8 @@ func _ready():
     "shoot_interval": 4,
     "shoot_at_player": false,
     "bullet_interval": 0.2,
-    "bullet_count": 3,
+    "bullet_count": 4,
+    "bullet_speed": 250,
 },
 {
     "enemy": enemy2,
@@ -61,6 +65,7 @@ func _ready():
     "shoot_at_player": false,
     "bullet_interval": 0.2,
     "bullet_count": 8,
+    "bullet_speed": 150,
 },
 {
     "enemy": enemy3,
@@ -70,9 +75,10 @@ func _ready():
     "shoots": true,
     "interval": 0.5,
     "shoot_interval": 1.2,
-    "shoot_at_player": true,
+    "shoot_at_player": false,
     "bullet_interval": 0.3,
-    "bullet_count": 1,
+    "bullet_count": 3,
+    "bullet_speed": 400,
 },
 {
     "enemy": enemy3,
@@ -82,9 +88,10 @@ func _ready():
     "shoots": true,
     "interval": 0.5,
     "shoot_interval": 1.2,
-    "shoot_at_player": true,
+    "shoot_at_player": false,
     "bullet_interval": 0.3,
-    "bullet_count": 1,
+    "bullet_count": 2,
+    "bullet_speed": 400,
 },
 ]
 

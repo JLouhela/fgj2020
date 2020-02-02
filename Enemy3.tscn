@@ -27,7 +27,7 @@ shape = SubResource( 1 )
 
 [node name="Sprite" parent="." index="1"]
 frames = SubResource( 2 )
-frame = 2
 
 [node name="PathFollow2D" parent="Path2D" index="0"]
-rotation = 2.57931
+position = Vector2( -176.986, 232.475 )
+rotation = -0.1762

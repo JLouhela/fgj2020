@@ -1,5 +1,7 @@
 extends Node2D
 
+signal dead
+
 export var speed = 200
 export var alive = false
 export var part_spawn_rate = 0.1
@@ -24,6 +26,7 @@ var shooting = false
 var rotate = true
 var shoot_at_player = true
 var bullet_count = 1
+var bullet_speed = 500
 
 const collision_type = "Enemy"
 
@@ -42,7 +45,7 @@ func initialize(wave, path, index):
     self.path = path
 #    self._path.position = Vector2(0, 0)
     self.speed = wave.speed
-    
+    self.bullet_speed = wave.bullet_speed
     self.rotate = wave.rotate
     
     if wave.shoots:
@@ -80,6 +83,7 @@ func spawn():
 
 
 func _on_Enemy_area_entered(area):
+    $CollisionShape2D.disabled = true
     call_deferred("_destroy")
     
 func _destroy():
@@ -87,6 +91,7 @@ func _destroy():
     _spawn_part()
     # TODO play explosion animation
     # onAnimationFinished -> delete from scene
+    emit_signal("dead", self.global_position)
     queue_free()
 
 func _spawn_part():
@@ -115,6 +120,7 @@ func _on_ShootTimer_timeout():
         bul.position = self.position
         bul.set_as_toplevel(true)
         bul.connect("free_bullet", bul, "_destroy")
+        bul.bullet_speed = self.bullet_speed
         main.add_child(bul)
         if shoot_at_player and player:
             bul.bullet_dir = self.position.direction_to(player.position)

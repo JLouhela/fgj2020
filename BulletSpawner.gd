@@ -7,11 +7,14 @@ onready var bullet = preload("res://Bullet.tscn")
 var bullet_pool = []
 var initial_velocity = Vector2(0,0)
 var shooting = false
+var last_shoot_ms = -1
 
 const bullet_sep = 24
 
 func enable():
     shooting = true
+    if last_shoot_ms + fire_delay_ms < OS.get_ticks_msec():
+        _shoot()
     $BulletTimer.wait_time = float(fire_delay_ms / 1000.0)
     $BulletTimer.start()
 
@@ -39,6 +42,7 @@ func _get_bullet():
     return b
     
 func _shoot():
+    last_shoot_ms = OS.get_ticks_msec()
     var start_offset_x = (bullet_count / 2) * -bullet_sep
     if bullet_count % 2 == 0:
         start_offset_x += bullet_sep / 2
