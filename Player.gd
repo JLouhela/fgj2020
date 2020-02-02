@@ -21,6 +21,7 @@ var immune = false
 
 var collision_type = "Player"
 var upgrade_idx = 0
+var repairing = false
 
 onready var sprite = $AnimatedSprite
 
@@ -33,12 +34,15 @@ func _input(event):
         position += event.relative
         $BulletSpawner.initial_velocity = event.relative
     if event is InputEventKey and event.is_pressed():
-        if event.get_scancode() == KEY_B:
-            break_level += 1
+        if event.get_scancode() == KEY_R:
+            _repair_ship()
             print("DEBUG: break level ", break_level)
-        if event.get_scancode() == KEY_V:
+        if event.get_scancode() == KEY_B:
             _break_ship()
             print("DEBUG: break level ", break_level)
+        if event.get_scancode() == KEY_G:
+            immune = !immune
+            print("DEBUG: god mode ", immune)
         
 func _update_hp():
     if break_level == 0 && hp < max_hp:
@@ -64,13 +68,16 @@ func _process(delta):
 func _on_Player_area_entered(area):
     if area.collision_type == "PartPickup":
         emit_signal("part_pickup", area.type)
-        if break_level == 0:
-            collected_spare_parts += 1
-            if collected_spare_parts > 2:
+        if area.type <= 2:
+            if break_level == 0:
+                collected_spare_parts += 1
+                if collected_spare_parts > 2:
+                    collected_spare_parts = 0
+                    # TODO display notification at hud
+                    emit_signal("unnecessary_parts_break")
+                    _break_ship()
+            else:
                 collected_spare_parts = 0
-                # TODO display notification at hud
-                emit_signal("unnecessary_parts_break")
-                _break_ship()
     else:
         _break_ship()
 
@@ -85,7 +92,6 @@ func upgrade():
 func _break_ship():
     if immune:
         return
-    
     $ImmunityTimer.start()
     $FlickerTimer.start()
     immune = true
@@ -93,11 +99,19 @@ func _break_ship():
     if break_level == 3:
         hp -= 50
         return
+
+    if repairing:
+        repairing = false
+        break_level -= 1
+    var tmp = break_level
     break_level = min(3, break_level + 1)
     emit_signal("break_part", break_level)
     
 func _repair_ship():
+    repairing = false
+    var tmp = break_level
     break_level = max(0, break_level -1)
+    print("REPAIR: %d -> %d" % [tmp, break_level])
 
 func _on_Main_ship_upgraded():
     upgrade()
@@ -118,7 +132,6 @@ func _on_FlickerTimer_timeout():
     else:
         show()
 
-
 func update_anim(hp):
     if hp < 4000:
         sprite.animation = 'Broke2'
@@ -126,3 +139,7 @@ func update_anim(hp):
         sprite.animation = 'Broke1'
     else:
         sprite.animation = 'idle'
+
+func _on_Main_repair_started():
+    if break_level > 0:
+        repairing = true
