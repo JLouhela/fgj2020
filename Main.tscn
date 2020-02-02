@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://NotificationManager.tscn" type="PackedScene" id=10]
 [ext_resource path="res://pickUpNameRandomizer.tscn" type="PackedScene" id=11]
 [ext_resource path="res://AudioStreamPlayer.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Logo.tscn" type="PackedScene" id=13]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.705882, 0.654902, 0.654902, 1 )
@@ -42,7 +43,6 @@ script = ExtResource( 5 )
 
 [node name="EnemyWaveTimer" type="Timer" parent="."]
 wait_time = 2.815
-autostart = true
 
 [node name="ScoreTimer" type="Timer" parent="."]
 wait_time = 0.1
@@ -116,6 +116,8 @@ valign = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="LOGO" parent="." instance=ExtResource( 13 )]
 [connection signal="repair_parts_needed" from="." to="HUD/VBoxContainer/HBoxContainer/RepairContainer" method="_new_parts_needed"]
 [connection signal="repair_started" from="." to="Player" method="_on_Main_repair_started"]
 [connection signal="reset_upgrades" from="." to="." method="randomize_upgrades"]
@@ -133,3 +135,5 @@ __meta__ = {
 [connection signal="part_pickup" from="Player" to="." method="_on_Player_part_pickup"]
 [connection signal="player_dead" from="Player" to="." method="_on_Player_player_dead"]
 [connection signal="take_hit" from="Player" to="ShakeCamera" method="_on_Player_take_hit"]
+[connection signal="done" from="LOGO" to="." method="_on_LOGO_done"]
+[connection signal="tree_exiting" from="LOGO" to="." method="_on_lg_tree_exiting"]
