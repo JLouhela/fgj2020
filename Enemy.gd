@@ -27,6 +27,7 @@ var rotate = true
 var shoot_at_player = true
 var bullet_count = 1
 var bullet_speed = 500
+var dead = false
 
 const collision_type = "Enemy"
 
@@ -83,14 +84,14 @@ func spawn():
 
 
 func _on_Enemy_area_entered(area):
-    $CollisionShape2D.disabled = true
+    if dead:
+        return
+    dead = true
     call_deferred("_destroy")
     
 func _destroy():
     $CollisionShape2D.disabled = true
     _spawn_part()
-    # TODO play explosion animation
-    # onAnimationFinished -> delete from scene
     emit_signal("dead", self.global_position)
     queue_free()
 

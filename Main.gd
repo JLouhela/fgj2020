@@ -83,6 +83,10 @@ func _on_Player_part_pickup(type):
         emit_signal(reset_signal)
         if repair_count > 6:
             repair_count = 9
+        elif repair_count > 3:
+            repair_count = 6
+        else:
+            repair_count = 3
         randomize_repairs(repair_count)
         return
     elif !is_upgrade:

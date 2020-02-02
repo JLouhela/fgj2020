@@ -93,27 +93,27 @@ func _on_UpgradeTween_tween_all_completed():
 
 func _on_BreakTimer_timeout():
     var tween_pos = $BreakNotificationText.rect_position
-    tween_pos.y += 1000
+    tween_pos.y += 1500
     $BreakTween.interpolate_property($BreakNotificationText, "rect_position",
-    $BreakNotificationText.rect_position, tween_pos, 0.2,
+    $BreakNotificationText.rect_position, tween_pos, 0.3,
     Tween.TRANS_CUBIC, Tween.EASE_IN)
     $BreakTween.start()
 
 
 func _on_RepairTimer_timeout():
     var tween_pos = $RepairNotificationText.rect_position
-    tween_pos.y += 1000
+    tween_pos.y += 1500
     $RepairTween.interpolate_property($RepairNotificationText, "rect_position",
-    $RepairNotificationText.rect_position, tween_pos, 0.2,
+    $RepairNotificationText.rect_position, tween_pos, 0.3,
     Tween.TRANS_CUBIC, Tween.EASE_IN)
     $RepairTween.start()
 
 
 func _on_UpgradeTimer_timeout():
     var tween_pos = $UpgradeNotificationText.rect_position
-    tween_pos.y += 1000
+    tween_pos.y += 1500
     $UpgradeTween.interpolate_property($UpgradeNotificationText, "rect_position",
-    $UpgradeNotificationText.rect_position, tween_pos, 0.2,
+    $UpgradeNotificationText.rect_position, tween_pos, 0.3,
     Tween.TRANS_CUBIC, Tween.EASE_IN)
     $UpgradeTween.start()
 

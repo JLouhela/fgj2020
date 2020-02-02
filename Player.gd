@@ -45,7 +45,9 @@ func _input(event):
             print("DEBUG: break level ", break_level)
         if event.get_scancode() == KEY_B:
             _break_ship()
-            print("DEBUG: break level ", break_level)
+        if event.get_scancode() == KEY_U:
+            upgrade()
+            print("DEBUG: upgrade ")
         if event.get_scancode() == KEY_G:
             immune = !immune
             print("DEBUG: god mode ", immune)
