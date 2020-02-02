@@ -16,7 +16,7 @@ func _ready():
 func randomizePickUpName():
     var pickUpNameAdjective = rng.randi_range(0, adjectives.size()-1)
     var pickUpNameSubstantive = rng.randi_range(0, substantives.size()-1)
-    pickUpName = adjectives[pickUpNameAdjective] +" "+substantives[pickUpNameSubstantive] + "!"
+    pickUpName = adjectives[pickUpNameAdjective] +" "+substantives[pickUpNameSubstantive]
     return pickUpName
 
 
