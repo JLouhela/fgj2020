@@ -33,6 +33,12 @@ func _input(event):
     if event is InputEventScreenDrag:
         position += event.relative
         $BulletSpawner.initial_velocity = event.relative
+    elif event is InputEventScreenTouch:
+        if event.is_pressed():
+            $BulletSpawner.enable()
+        else:
+            $BulletSpawner.disable()
+
     if event is InputEventKey and event.is_pressed():
         if event.get_scancode() == KEY_R:
             _repair_ship()
