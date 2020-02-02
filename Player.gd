@@ -4,6 +4,8 @@ signal part_pickup
 signal hp_update
 signal break_part
 signal unnecessary_parts_break
+signal take_hit
+signal player_dead
 
 var move_start_pos = Vector2(-1, -1)
 var move_started = false
@@ -11,7 +13,9 @@ var width = 32
 var height = 64
 var collected_spare_parts = 0
 
-var hp = 10000
+# TODO if adjusted, adjust progress bar max value
+var max_hp = 10000
+var hp = max_hp
 var break_level = 0
 var immune = false
 
@@ -35,11 +39,14 @@ func _input(event):
             print("DEBUG: break level ", break_level)
         
 func _update_hp():
-    if break_level == 0:
+    if break_level == 0 && hp < max_hp:
         hp += 1
     else:
         hp -= break_level
+        
     emit_signal("hp_update", hp) 
+    if hp <= 0:
+        emit_signal("player_dead")
 
 func _process(delta):
     _update_hp()
@@ -80,7 +87,7 @@ func _break_ship():
     $ImmunityTimer.start()
     $FlickerTimer.start()
     immune = true
-    
+    emit_signal("take_hit")
     if break_level == 3:
         hp -= 50
         return

@@ -93,3 +93,8 @@ func _on_ScoreTimer_timeout():
     score += 1
     $ScoreText.text = ("Score: %d" % score)
 
+
+
+func _on_Player_player_dead():
+    # TODO
+    get_tree().paused = true
