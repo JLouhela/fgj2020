@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://NotificationManager.tscn" type="PackedScene" id=10]
 [ext_resource path="res://pickUpNameRandomizer.tscn" type="PackedScene" id=11]
 [ext_resource path="res://AudioStreamPlayer.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Logo.tscn" type="PackedScene" id=13]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.705882, 0.654902, 0.654902, 1 )
@@ -116,11 +117,13 @@ valign = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="lögö" parent="." instance=ExtResource( 13 )]
 [connection signal="repair_parts_needed" from="." to="HUD/VBoxContainer/HBoxContainer/RepairContainer" method="_new_parts_needed"]
 [connection signal="repair_started" from="." to="Player" method="_on_Main_repair_started"]
 [connection signal="reset_upgrades" from="." to="." method="randomize_upgrades"]
-[connection signal="ship_repaired" from="." to="NotificationManager" method="_on_Main_ship_repaired"]
 [connection signal="ship_repaired" from="." to="Player" method="_on_Main_ship_repaired"]
+[connection signal="ship_repaired" from="." to="NotificationManager" method="_on_Main_ship_repaired"]
 [connection signal="ship_upgraded" from="." to="Player" method="_on_Main_ship_upgraded"]
 [connection signal="ship_upgraded" from="." to="." method="randomize_upgrades"]
 [connection signal="upgrade_parts_needed" from="." to="HUD/VBoxContainer/HBoxContainer/UpgradeContainer" method="_new_parts_needed"]
