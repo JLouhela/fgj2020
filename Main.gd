@@ -29,7 +29,6 @@ var repair_parts_broken = []
 func _ready():
     randomize()
     randomize_upgrades()
-    spawn_random_wave()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
