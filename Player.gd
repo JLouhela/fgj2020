@@ -111,7 +111,6 @@ func _repair_ship():
     repairing = false
     var tmp = break_level
     break_level = max(0, break_level -1)
-    print("REPAIR: %d -> %d" % [tmp, break_level])
 
 func _on_Main_ship_upgraded():
     upgrade()
