@@ -22,6 +22,8 @@ var immune = false
 var collision_type = "Player"
 var upgrade_idx = 0
 
+onready var sprite = $AnimatedSprite
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
     set_process_input(true)
@@ -116,3 +118,12 @@ func _on_FlickerTimer_timeout():
     else:
         show()
 
+
+
+func update_anim(hp):
+    if hp < 4000:
+        sprite.animation = 'Broke2'
+    elif hp < 7500:
+        sprite.animation = 'Broke1'
+    else:
+        sprite.animation = 'idle'
