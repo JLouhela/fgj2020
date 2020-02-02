@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Enemy.gd" type="Script" id=1]
 [ext_resource path="res://gfx/enemy0001.png" type="Texture" id=2]
-[ext_resource path="res://enemy_paths/path9.tres" type="Curve2D" id=3]
 [ext_resource path="res://gfx/enemy0000.png" type="Texture" id=4]
 
 [sub_resource type="CapsuleShape2D" id=1]
@@ -36,7 +35,7 @@ playing = true
 
 [node name="Path2D" type="Path2D" parent="."]
 position = Vector2( 0.805847, 1.45062 )
-curve = ExtResource( 3 )
+curve = null
 __meta__ = {
 "_edit_lock_": true
 }

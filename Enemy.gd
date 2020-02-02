@@ -1,5 +1,7 @@
 extends Node2D
 
+signal dead
+
 export var speed = 200
 export var alive = false
 export var part_spawn_rate = 0.1
@@ -81,6 +83,7 @@ func spawn():
 
 
 func _on_Enemy_area_entered(area):
+    $CollisionShape2D.disabled = true
     call_deferred("_destroy")
     
 func _destroy():
@@ -88,6 +91,7 @@ func _destroy():
     _spawn_part()
     # TODO play explosion animation
     # onAnimationFinished -> delete from scene
+    emit_signal("dead", self.global_position)
     queue_free()
 
 func _spawn_part():
