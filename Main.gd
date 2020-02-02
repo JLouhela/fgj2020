@@ -14,6 +14,8 @@ var PartPickup = preload("res://PartPickup.gd").new()
 onready var enemy_patterns = $EnemyPatterns
 onready var wave_timer = $EnemyWaveTimer
 
+var score = 0
+
 var repair_parts_needed = []
 var upgrade_parts_needed = []
 var repair_count = 0
@@ -86,3 +88,8 @@ func _on_Player_part_pickup(type):
 
 func _on_Player_break_part(break_lvl):
     randomize_repairs(break_lvl * 3)
+
+func _on_ScoreTimer_timeout():
+    score += 1
+    $ScoreText.text = ("Score: %d" % score)
+
