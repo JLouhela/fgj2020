@@ -22,6 +22,8 @@ var repair_parts_needed = []
 var upgrade_parts_needed = []
 var repair_count = 0
 
+var repair_parts_broken = []
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
     randomize()
@@ -87,22 +89,23 @@ func _on_Player_part_pickup(type):
         
     if is_upgrade and parts.size() == 0:
         emit_signal(complete_signal)
+        $NotificationManager.notify_upgrade($Player.position.y - 20)
         return
     elif !is_upgrade and parts.size() % 3 == 0:
+        var fixed = repair_parts_broken.pop_back()
+        $NotificationManager.notify_repair(fixed, $Player.position.y - 20)
         emit_signal(complete_signal)
         #lol hack no return to update ui
-    
     emit_signal(signal_name, parts)
 
-
 func _on_Player_break_part(break_lvl):
+    repair_parts_broken.append($pickUpNameRandomizer.randomizePickUpName())
+    $NotificationManager.notify_break(repair_parts_broken.back(), $Player.position.y - 20)
     randomize_repairs(break_lvl * 3)
 
 func _on_ScoreTimer_timeout():
     score += 1
     $ScoreText.text = ("Score: %d" % score)
-
-
 
 func _on_Player_player_dead():
     # TODO

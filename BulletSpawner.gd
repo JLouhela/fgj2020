@@ -6,13 +6,18 @@ var bullet_count = 1
 onready var bullet = preload("res://Bullet.tscn")
 var bullet_pool = []
 var initial_velocity = Vector2(0,0)
+var shooting = false
 
 const bullet_sep = 24
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
+func enable():
+    shooting = true
     $BulletTimer.wait_time = float(fire_delay_ms / 1000.0)
     $BulletTimer.start()
+
+func disable():
+    shooting = false
+    $BulletTimer.stop()
 
 func onBulletFree(b):
     b.disable()
