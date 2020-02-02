@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Enemy.gd" type="Script" id=1]
 [ext_resource path="res://gfx/enemy0001.png" type="Texture" id=2]
+[ext_resource path="res://enemy_paths/path9.tres" type="Curve2D" id=3]
 [ext_resource path="res://gfx/enemy0000.png" type="Texture" id=4]
 
 [sub_resource type="CapsuleShape2D" id=1]
@@ -30,16 +31,23 @@ shape = SubResource( 1 )
 [node name="Sprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 2, 2 )
 frames = SubResource( 2 )
+frame = 1
 playing = true
 
 [node name="Path2D" type="Path2D" parent="."]
-position = Vector2( -369.476, 12.3991 )
-curve = null
+position = Vector2( 0.805847, 1.45062 )
+curve = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
-position = Vector2( 475.462, -80.6881 )
-rotation = 2.57931
+position = Vector2( -1.9256, 3.3616 )
+rotation = 2.01554
 loop = false
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 

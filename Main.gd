@@ -35,10 +35,11 @@ func _ready():
 func spawn_random_wave():
 
     var wave = enemy_patterns.waves[randi() % enemy_patterns.waves.size()]
+    var path = enemy_patterns.paths[randi() % enemy_patterns.paths.size()]
     for i in range(wave.count):
         var enemy = wave.enemy.instance()
         self.add_child(enemy)
-        enemy.initialize(wave, i)
+        enemy.initialize(wave, path, i)
      
 
 func _on_EnemyWaveTimer_timeout():

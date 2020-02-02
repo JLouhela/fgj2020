@@ -11,6 +11,7 @@ onready var _path_follow = $Path2D/PathFollow2D
 onready var timer = $SpawnTimer
 onready var bullet_timer = $BulletTimer
 onready var shoot_timer = $ShootTimer
+onready var visnot = $VisibilityNotifier2D
 
 onready var bullet = preload("res://EnemyBullet.tscn")
 onready var part = preload("res://PartPickup.tscn")
@@ -28,6 +29,7 @@ const collision_type = "Enemy"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+    _path.set_as_toplevel(true)
     _path.curve = path
     self.timer.start()
 
@@ -36,8 +38,9 @@ func set_path(new_curve):
     if is_inside_tree():
         _path.curve = new_curve
 
-func initialize(wave, index):
-    self.path = wave.path
+func initialize(wave, path, index):
+    self.path = path
+#    self._path.position = Vector2(0, 0)
     self.speed = wave.speed
     
     self.rotate = wave.rotate
@@ -101,11 +104,11 @@ func _on_BulletTimer_timeout():
     
 
 func _on_ShootTimer_timeout():
-    if self.position.y > get_viewport_rect().size.y:
+    if !visnot.is_on_screen():
         return
     self.shooting = true
 
-    var bul_angle = PI/PI/bullet_count
+    var bul_angle = PI/PI/float(bullet_count)
     
     for b in bullet_count:
         var bul = bullet.instance()
@@ -116,7 +119,7 @@ func _on_ShootTimer_timeout():
         if shoot_at_player and player:
             bul.bullet_dir = self.position.direction_to(player.position)
         else:
-            var angle = bul.bullet_dir.angle() - bul_angle + (b * bul_angle)
+            var angle = bul.bullet_dir.angle() - (bul_angle * bullet_count/2) + (b * bul_angle)
             bul.bullet_dir = Vector2(cos(angle), sin(angle))
             
         bul.enable()
