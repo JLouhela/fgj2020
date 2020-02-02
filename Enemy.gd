@@ -24,6 +24,7 @@ var shooting = false
 var rotate = true
 var shoot_at_player = true
 var bullet_count = 1
+var bullet_speed = 500
 
 const collision_type = "Enemy"
 
@@ -42,7 +43,7 @@ func initialize(wave, path, index):
     self.path = path
 #    self._path.position = Vector2(0, 0)
     self.speed = wave.speed
-    
+    self.bullet_speed = wave.bullet_speed
     self.rotate = wave.rotate
     
     if wave.shoots:
@@ -115,6 +116,7 @@ func _on_ShootTimer_timeout():
         bul.position = self.position
         bul.set_as_toplevel(true)
         bul.connect("free_bullet", bul, "_destroy")
+        bul.bullet_speed = self.bullet_speed
         main.add_child(bul)
         if shoot_at_player and player:
             bul.bullet_dir = self.position.direction_to(player.position)

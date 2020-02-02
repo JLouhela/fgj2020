@@ -31,4 +31,3 @@ bullet_speed = 389
 [node name="AnimatedSprite" parent="." index="1"]
 frames = SubResource( 1 )
 animation = "enemy"
-frame = 0
