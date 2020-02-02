@@ -9,7 +9,9 @@ export (Curve2D) var path setget set_path
 onready var _path = $Path2D
 onready var _path_follow = $Path2D/PathFollow2D
 onready var timer = $SpawnTimer
-onready var shoot_timer = $BulletTimer
+onready var bullet_timer = $BulletTimer
+onready var shoot_timer = $ShootTimer
+onready var visnot = $VisibilityNotifier2D
 
 onready var bullet = preload("res://EnemyBullet.tscn")
 onready var part = preload("res://PartPickup.tscn")
@@ -17,13 +19,17 @@ onready var part = preload("res://PartPickup.tscn")
 onready var player = get_tree().get_root().get_node("Main/Player")
 onready var main = get_tree().get_root().get_node("Main")
 
+var shoots = false
+var shooting = false
 var rotate = true
 var shoot_at_player = true
+var bullet_count = 1
 
 const collision_type = "Enemy"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+    _path.set_as_toplevel(true)
     _path.curve = path
     self.timer.start()
 
@@ -32,11 +38,18 @@ func set_path(new_curve):
     if is_inside_tree():
         _path.curve = new_curve
 
-func initialize(wave, index):
-    self.path = wave.path
+func initialize(wave, path, index):
+    self.path = path
+#    self._path.position = Vector2(0, 0)
     self.speed = wave.speed
     
     self.rotate = wave.rotate
+    
+    if wave.shoots:
+        self.shoots = wave.shoots
+        self.shoot_at_player = wave.shoot_at_player
+        self.bullet_count  = wave.bullet_count
+        shoot_timer.wait_time = wave.shoot_interval
     
 #    self._path.global_position = self.global_position
     
@@ -45,6 +58,9 @@ func initialize(wave, index):
 
 func _process(delta):
     if !self.alive:
+        return
+    
+    if shooting and !shoot_at_player:
         return
     
     self._path_follow.offset += self.speed * delta
@@ -59,6 +75,8 @@ func _process(delta):
 
 func spawn():
     self.alive = true
+    if self.shoots:
+        shoot_timer.start()
 
 
 func _on_Enemy_area_entered(area):
@@ -82,13 +100,27 @@ func _spawn_part():
 
 
 func _on_BulletTimer_timeout():
-    if self.position.y > get_viewport_rect().size.y:
+    pass
+    
+
+func _on_ShootTimer_timeout():
+    if !visnot.is_on_screen():
         return
-    var bul = bullet.instance()
-    bul.position = self.position
-    bul.set_as_toplevel(true)
-    bul.connect("free_bullet", bul, "_destroy")
-    main.add_child(bul)
-    if shoot_at_player and player:
-        bul.bullet_dir = self.position.direction_to(player.position)
+    self.shooting = true
+
+    var bul_angle = PI/PI/float(bullet_count)
+    
+    for b in bullet_count:
+        var bul = bullet.instance()
+        bul.position = self.position
+        bul.set_as_toplevel(true)
+        bul.connect("free_bullet", bul, "_destroy")
+        main.add_child(bul)
+        if shoot_at_player and player:
+            bul.bullet_dir = self.position.direction_to(player.position)
+        else:
+            var angle = bul.bullet_dir.angle() - (bul_angle * bullet_count/2) + (b * bul_angle)
+            bul.bullet_dir = Vector2(cos(angle), sin(angle))
+            
         bul.enable()
+    self.shooting = false

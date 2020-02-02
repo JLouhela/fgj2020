@@ -39,7 +39,7 @@ position = Vector2( 285.129, 795.469 )
 script = ExtResource( 5 )
 
 [node name="EnemyWaveTimer" type="Timer" parent="."]
-wait_time = 3.263
+wait_time = 2.815
 autostart = true
 
 [node name="HUD" type="MarginContainer" parent="."]
