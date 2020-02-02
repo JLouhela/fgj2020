@@ -119,3 +119,9 @@ func spawn_explosion(pos):
     self.add_child(obj)
     obj.position = pos
     obj.play()
+
+
+
+
+func _on_LOGO_done():
+    $EnemyWaveTimer.start()

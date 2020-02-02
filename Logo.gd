@@ -1,5 +1,6 @@
 extends Node2D
 
+signal done
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -23,4 +24,5 @@ func _ready():
 
 
 func _on_Tween_tween_all_completed():
+    emit_signal("done")
     queue_free()
