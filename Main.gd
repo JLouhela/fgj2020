@@ -3,6 +3,8 @@ extends Node2D
 signal repair_parts_needed
 signal upgrade_parts_needed
 
+signal repair_started
+
 signal reset_repair
 signal reset_upgrades
 
@@ -71,10 +73,16 @@ func _on_Player_part_pickup(type):
         reset_signal = "reset_upgrades"
 
     var needed = parts.pop_back()
+
     if type != needed:
         emit_signal(reset_signal)
+        if repair_count > 6:
+            repair_count = 9
         randomize_repairs(repair_count)
         return
+    elif !is_upgrade:
+        emit_signal("repair_started")
+        repair_count -= 1
         
     if is_upgrade and parts.size() == 0:
         emit_signal(complete_signal)
