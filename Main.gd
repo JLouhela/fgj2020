@@ -105,7 +105,7 @@ func _on_Player_break_part(break_lvl):
 
 func _on_ScoreTimer_timeout():
     score += 1
-    $ScoreText.text = ("Score: %d" % score)
+    $HUD/ScoreText.text = ("Score: %d" % score)
 
 func _on_Player_player_dead():
     # TODO
