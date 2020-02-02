@@ -114,6 +114,7 @@ script = ExtResource( 9 )
 [connection signal="break_part" from="Player" to="ShakeCamera" method="_on_Player_break_part"]
 [connection signal="break_part" from="Player" to="." method="_on_Player_break_part"]
 [connection signal="hp_update" from="Player" to="HUD/VBoxContainer/HPBar" method="_on_Player_hp_update"]
+[connection signal="hp_update" from="Player" to="Player" method="update_anim"]
 [connection signal="part_pickup" from="Player" to="." method="_on_Player_part_pickup"]
 [connection signal="player_dead" from="Player" to="." method="_on_Player_player_dead"]
 [connection signal="take_hit" from="Player" to="ShakeCamera" method="_on_Player_take_hit"]
