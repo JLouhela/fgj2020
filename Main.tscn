@@ -43,6 +43,7 @@ script = ExtResource( 5 )
 
 [node name="EnemyWaveTimer" type="Timer" parent="."]
 wait_time = 2.815
+autostart = true
 
 [node name="ScoreTimer" type="Timer" parent="."]
 wait_time = 0.1
