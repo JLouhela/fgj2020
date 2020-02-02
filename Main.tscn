@@ -15,14 +15,14 @@
 [ext_resource path="res://Logo.tscn" type="PackedScene" id=13]
 
 [sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.705882, 0.654902, 0.654902, 1 )
+bg_color = Color( 0.964706, 0.839216, 0.741176, 1 )
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
 
 [sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0.333333, 0.266667, 0.266667, 1 )
+bg_color = Color( 0.505882, 0.384314, 0.443137, 1 )
 
 [sub_resource type="DynamicFont" id=3]
 font_data = ExtResource( 8 )
@@ -121,8 +121,8 @@ __meta__ = {
 [connection signal="repair_parts_needed" from="." to="HUD/VBoxContainer/HBoxContainer/RepairContainer" method="_new_parts_needed"]
 [connection signal="repair_started" from="." to="Player" method="_on_Main_repair_started"]
 [connection signal="reset_upgrades" from="." to="." method="randomize_upgrades"]
-[connection signal="ship_repaired" from="." to="Player" method="_on_Main_ship_repaired"]
 [connection signal="ship_repaired" from="." to="NotificationManager" method="_on_Main_ship_repaired"]
+[connection signal="ship_repaired" from="." to="Player" method="_on_Main_ship_repaired"]
 [connection signal="ship_upgraded" from="." to="Player" method="_on_Main_ship_upgraded"]
 [connection signal="ship_upgraded" from="." to="." method="randomize_upgrades"]
 [connection signal="upgrade_parts_needed" from="." to="HUD/VBoxContainer/HBoxContainer/UpgradeContainer" method="_new_parts_needed"]

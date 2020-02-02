@@ -41,10 +41,10 @@ func blah(cunt):
     var part
     for i in range(cunt - 2, -1, -1):
         part = self.parts[i]
-        part.modulate = self.orig_colors[i].darkened(0.3)
+        part.modulate = self.orig_colors[i].darkened(0.5)
 
     part = self.parts[cunt - 1]
-    part.rect_min_size = Vector2(54, 54)
+    part.rect_min_size = Vector2(64, 64)
     part.modulate = self.orig_colors[cunt - 1]
 
 func _new_parts_needed(p):
