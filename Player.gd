@@ -119,7 +119,6 @@ func _on_FlickerTimer_timeout():
         show()
 
 
-
 func update_anim(hp):
     if hp < 4000:
         sprite.animation = 'Broke2'

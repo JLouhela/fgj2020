@@ -9,11 +9,16 @@ export (Curve2D) var path setget set_path
 onready var _path = $Path2D
 onready var _path_follow = $Path2D/PathFollow2D
 onready var timer = $SpawnTimer
+onready var shoot_timer = $BulletTimer
 
-onready var bullet = preload("res://Bullet.tscn")
+onready var bullet = preload("res://EnemyBullet.tscn")
 onready var part = preload("res://PartPickup.tscn")
 
+onready var player = get_tree().get_root().get_node("Main/Player")
+onready var main = get_tree().get_root().get_node("Main")
+
 var rotate = true
+var shoot_at_player = true
 
 const collision_type = "Enemy"
 
@@ -74,3 +79,16 @@ func _spawn_part():
         p.position = global_position
         p.set_as_toplevel(true)
         get_parent().add_child(p)
+
+
+func _on_BulletTimer_timeout():
+    if self.position.y > get_viewport_rect().size.y:
+        return
+    var bul = bullet.instance()
+    bul.position = self.position
+    bul.set_as_toplevel(true)
+    bul.connect("free_bullet", bul, "_destroy")
+    main.add_child(bul)
+    if shoot_at_player and player:
+        bul.bullet_dir = self.position.direction_to(player.position)
+        bul.enable()
