@@ -15,7 +15,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Fgj 2020"
+config/name="Avaruushippa"
 run/main_scene="res://Main.tscn"
 config/icon="res://icon.png"
 
@@ -36,5 +36,6 @@ pointing/emulate_mouse_from_touch=false
 
 quality/driver/fallback_to_gles2=true
 quality/2d/use_pixel_snap=true
+vram_compression/import_etc=true
 environment/default_clear_color=Color( 0, 0, 0, 1 )
 environment/default_environment="res://default_env.tres"
